@@ -1,5 +1,6 @@
 import {
   BlockedByCloudflareError,
+  HTTPError,
   Result,
   TooManyRequestsError,
   UnauthorizedError,
@@ -65,6 +66,8 @@ export const getConversation = (conversationId: string):
           return makeUnauthorizedError();
         case 429:
           return makeTooManyRequestsError();
+        default:
+          throw new HTTPError(res);
       }
     }
 

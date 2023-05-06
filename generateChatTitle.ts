@@ -1,6 +1,7 @@
 import {
   BlockedByCloudflareError,
   HasAlreadyTitleError,
+  HTTPError,
   Result,
   TooManyRequestsError,
   UnauthorizedError,
@@ -51,6 +52,8 @@ export const generateChatTitle = (conversationId: string, messageId: string):
           return makeUnauthorizedError();
         case 429:
           return makeTooManyRequestsError();
+        default:
+          throw new HTTPError(res);
       }
     }
 

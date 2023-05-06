@@ -3,6 +3,7 @@
 /// <reference lib="dom" />
 import {
   BlockedByCloudflareError,
+  HTTPError,
   Result,
   TooLongMessageError,
   TooManyRequestsError,
@@ -117,6 +118,8 @@ export const sendMessage = (
               message: (await res.json()).detail?.message,
             },
           };
+        default:
+          throw new HTTPError(res);
       }
     }
     if (!res.body) {

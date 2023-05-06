@@ -32,3 +32,21 @@ export interface HasAlreadyTitleError {
   name: "HasAlreadyTitleError";
   message: string;
 }
+
+export class HTTPError extends Error {
+  name = "HTTPError";
+
+  constructor(
+    public response: Response,
+  ) {
+    super(
+      `${response.status} ${response.statusText} when fetching ${response.url}`,
+    );
+
+    // @ts-ignore only available on V8
+    if (Error.captureStackTrace) {
+      // @ts-ignore only available on V8
+      Error.captureStackTrace(this, HTTPError);
+    }
+  }
+}
