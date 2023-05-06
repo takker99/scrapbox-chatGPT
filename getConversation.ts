@@ -17,13 +17,13 @@ export interface Conversation {
   create_time: number;
   /** 最後に会話した日時 (UNIX TIME) */
   update_time: number;
-  mapping: Record<string, Message>;
+  mapping: Record<string, MessageItem>;
   moderation_results: [];
   /** 一番最後の会話のID */
   current_node: string;
 }
 
-export interface Message {
+export interface MessageItem {
   id: string;
   message?: Prompt;
   parent?: string;
