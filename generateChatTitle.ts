@@ -1,5 +1,6 @@
 import {
   BlockedByCloudflareError,
+  HasAlreadyTitleError,
   makeTooManyRequestsError,
   makeUnauthorizedError,
   Result,
@@ -9,11 +10,6 @@ import {
 import { getAccessToken, resetAccessToken } from "./accessToken.ts";
 
 declare const GM_fetch: (typeof fetch) | undefined;
-
-export interface HasAlreadyTitleError {
-  name: "HasAlreadyTitleError";
-  message: string;
-}
 
 export const generateChatTitle = (conversationId: string, messageId: string):
   | Promise<

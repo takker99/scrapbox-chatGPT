@@ -27,6 +27,11 @@ export interface BlockedByCloudflareError {
   message: string;
 }
 
+export interface HasAlreadyTitleError {
+  name: "HasAlreadyTitleError";
+  message: string;
+}
+
 export const makeUnauthorizedError = (): {
   ok: false;
   value: UnauthorizedError;
