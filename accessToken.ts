@@ -53,9 +53,9 @@ export const getAccessToken = ():
     const text = await res.text();
 
     if (isBlockedByCloudflare(text)) return makeBlockedByCloudflareError();
-    const json = JSON.parse(text);
-    if (!json.token) return makeUnauthorizedError();
-    const { accessToken: token, expires } = json as ChatGPTSession;
+    const json = JSON.parse(text) as ChatGPTSession;
+    if (!json.accessToken) return makeUnauthorizedError();
+    const { accessToken: token, expires } = json;
     if (expires) tokenExpires = new Date(expires).getTime();
     accessToken = token;
     return { ok: true, value: token };
