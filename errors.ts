@@ -13,6 +13,11 @@ export interface TooManyRequestsError {
   message: string;
 }
 
+export interface TooLongMessageError {
+  name: "TooLongMessageError";
+  message: string;
+}
+
 export interface UnauthorizedError {
   name: "UnauthorizedError";
   message: string;

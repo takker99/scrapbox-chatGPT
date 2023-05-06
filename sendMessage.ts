@@ -4,6 +4,7 @@
 import {
   BlockedByCloudflareError,
   Result,
+  TooLongMessageError,
   TooManyRequestsError,
   UnauthorizedError,
 } from "./errors.ts";
@@ -56,6 +57,7 @@ export const sendMessage = (
       | UnauthorizedError
       | BlockedByCloudflareError
       | TooManyRequestsError
+      | TooLongMessageError
     >
   >
   | undefined => {
@@ -107,6 +109,14 @@ export const sendMessage = (
           return makeUnauthorizedError();
         case 429:
           return makeTooManyRequestsError();
+        case 413:
+          return {
+            ok: false,
+            value: {
+              name: "TooLongMessageError",
+              message: (await res.json()).detail?.message,
+            },
+          };
       }
     }
     if (!res.body) {
