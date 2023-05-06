@@ -3,12 +3,14 @@
 /// <reference lib="dom" />
 import {
   BlockedByCloudflareError,
-  makeTooManyRequestsError,
-  makeUnauthorizedError,
   Result,
   TooManyRequestsError,
   UnauthorizedError,
 } from "./errors.ts";
+import {
+  makeTooManyRequestsError,
+  makeUnauthorizedError,
+} from "./makeError.ts";
 import { getAccessToken, resetAccessToken } from "./accessToken.ts";
 import { uuid } from "./uuid.ts";
 import { Prompt, PromptContent, User } from "./types.ts";
@@ -51,7 +53,9 @@ export const sendMessage = (
   | Promise<
     Result<
       AsyncGenerator<MessageResponse, void, unknown>,
-      UnauthorizedError | BlockedByCloudflareError | TooManyRequestsError
+      | UnauthorizedError
+      | BlockedByCloudflareError
+      | TooManyRequestsError
     >
   >
   | undefined => {

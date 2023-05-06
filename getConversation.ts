@@ -1,13 +1,15 @@
 import {
   BlockedByCloudflareError,
-  makeTooManyRequestsError,
-  makeUnauthorizedError,
   Result,
   TooManyRequestsError,
   UnauthorizedError,
 } from "./errors.ts";
 import { getAccessToken, resetAccessToken } from "./accessToken.ts";
 import { Prompt } from "./types.ts";
+import {
+  makeTooManyRequestsError,
+  makeUnauthorizedError,
+} from "./makeError.ts";
 
 declare const GM_fetch: (typeof fetch) | undefined;
 

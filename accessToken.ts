@@ -1,11 +1,13 @@
 import {
   BlockedByCloudflareError,
-  isBlockedByCloudflare,
-  makeBlockedByCloudflareError,
-  makeUnauthorizedError,
   Result,
   UnauthorizedError,
 } from "./errors.ts";
+import {
+  isBlockedByCloudflare,
+  makeBlockedByCloudflareError,
+  makeUnauthorizedError,
+} from "./makeError.ts";
 
 declare const GM_fetch: (typeof fetch) | undefined;
 
